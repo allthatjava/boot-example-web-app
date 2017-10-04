@@ -1,38 +1,46 @@
 package brian.boot.template.web.app.domain;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="POST")
+@Table(name="post")
 public class Post {
 
     @Id
-    private int postId;
+    @GeneratedValue
+    @Column(name="post_id")
+    private Integer postId;
+
     @ManyToOne
-    private TestUser userId;
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private TestUser testUser;
+
     private String subject;
     private String content;
+
+    @Column(name="created_datetime")
     private Timestamp createdDatetime;
 
-    public int getPostId() {
+    private Post(){}
+
+    public Integer getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(Integer postId) {
         this.postId = postId;
     }
 
-    public TestUser getUserId() {
-        return userId;
+    public TestUser getTestUser() {
+        return testUser;
     }
 
-    public void setUserId(TestUser userId) {
-        this.userId = userId;
+    public void setTestUser(TestUser testUser) {
+        this.testUser = testUser;
     }
 
     public String getSubject() {
@@ -58,4 +66,5 @@ public class Post {
     public void setCreatedDatetime(Timestamp createdDatetime) {
         this.createdDatetime = createdDatetime;
     }
+
 }

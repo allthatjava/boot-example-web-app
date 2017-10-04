@@ -1,25 +1,28 @@
 package brian.boot.template.web.app.domain;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
-@EntityScan
-@Table(name="TEST_USER")
+@Entity
+@Table(name="test_user")
 public class TestUser {
 
     @Id
+    @Column(name="user_id")
     private String userId;
     private String pw;
     private String name;
     private String title;
     private int age;
 
-    @OneToMany
+
+    @OneToMany(mappedBy = "testUser")
+    @JsonBackReference
     private List<Post> posts;
+
+    public TestUser(){}
 
     public List<Post> getPosts() {
         return posts;
