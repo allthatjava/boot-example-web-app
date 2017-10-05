@@ -1,16 +1,17 @@
 # Spring Boot Web Application Template
 Template of Web Application, so I can literally copy and paste to start a web application.
-
-Just for the testing purpose, Embeded H2 database is used.
+Just for the testing purpose, Embedded H2 database is used.
 
 ## Template contains
 * Framework : Spring Boot - 1.5.7
 * Front End : AngularJS - 2.0
 * ORM : JPA / Hibernate
 * Database : H2 - h2-2017-04-23
+* Unit Test : jUnit + AssertJ
+* Code Quality : Jacoco
 
 ## Initialization
-Run the project by the following command `./gradlew bootRun` then when the Tomcat server is up, go to `http://localhost:8080/h2` on the browser.
+Run the project by the following command `./gradlew bootRun` then when the Tomcat server is up, go to `http://localhost:8080/h2-console` on the browser.
 
 #### Create Test Database
 ```
@@ -50,4 +51,12 @@ INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1',
 INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester3', 'Test Subject 8', 'Contents of Test subject 8', CURRENT_TIMESTAMP());
 INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1', 'Test Subject 9', 'Contents of Test subject 9', CURRENT_TIMESTAMP());
 ```
+
+## Unit Testing
+
+
+## Integration Test
+
+
+## Code Quality Check
 
