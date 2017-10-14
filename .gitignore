@@ -27,6 +27,7 @@ hs_err_pid*
 .gradle/
 .springBeans
 .idea/
+*.iml
 
 bin/
 build/
