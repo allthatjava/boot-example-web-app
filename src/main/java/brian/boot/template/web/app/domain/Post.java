@@ -25,7 +25,7 @@ public class Post {
     @Column(name="created_datetime")
     private Timestamp createdDatetime;
 
-    private Post(){}
+//    private Post(){}  // Good to have private constructor but, need to be public for testing
 
     public Integer getPostId() {
         return postId;

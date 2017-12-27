@@ -22,8 +22,6 @@ public class TestUser {
     @JsonBackReference
     private List<Post> posts;
 
-    public TestUser(){}
-
     public List<Post> getPosts() {
         return posts;
     }
