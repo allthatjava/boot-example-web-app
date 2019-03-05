@@ -11,7 +11,8 @@ Just for the testing purpose, Embedded H2 database is used.
 * Code Quality : Jacoco
 
 ## Initialization
-Run the project by the following command `./gradlew bootRun` then when the Tomcat server is up, go to `http://localhost:8080/h2-console` on the browser.
+Run the project by the following command `./gradlew bootRun` then when the Tomcat server is up, 
+go to `http://localhost:8080/h2-console` on the browser.
 
 #### Create Test Database
 ```
@@ -53,10 +54,16 @@ INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1',
 ```
 
 ## Unit Testing
-
+TBD
 
 ## Integration Test
-
+TBD
 
 ## Code Quality Check
+TBD
+
+## How to use the this web application
+* To see all posts data : http://localhost:8080/posts
+* To see one post : http://localhost:8080/post/{post_id} -> e.g. http://localhost:8080/post/1
+
 

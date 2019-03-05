@@ -1,13 +1,14 @@
 package brian.boot.template.web.app.controller;
 
-import brian.boot.template.web.app.domain.Post;
-import brian.boot.template.web.app.service.PostService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import brian.boot.template.web.app.domain.Post;
+import brian.boot.template.web.app.service.PostService;
 
 @RestController
 public class PostController {
@@ -19,9 +20,15 @@ public class PostController {
         this.postService = postService;
     }
 
-    @RequestMapping(name = "/posts", method = RequestMethod.GET)
+    @GetMapping(path="/posts")
     public List<Post> getPosts()
     {
         return postService.getAllPost();
+    } 
+    
+    @GetMapping(path="/post/{id}")
+    public Post getPost(@PathVariable("id") Integer id )
+    {
+    	return postService.getPost(id);
     }
 }
