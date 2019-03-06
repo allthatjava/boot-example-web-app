@@ -18,7 +18,12 @@ public class PostService {
         return (List<Post>)postRepository.findAll();
     }
     
-    public Post getPost(int id) {
-    	return postRepository.findOne(id);
+    public Post getPost(int postId) {
+    	
+    	return postRepository.findOne(postId);
+    }
+    
+    public Post addPost(Post post) {
+    	return postRepository.save(post);
     }
 }

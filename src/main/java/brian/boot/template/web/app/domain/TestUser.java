@@ -17,6 +17,9 @@ public class TestUser {
     private String title;
     private int age;
 
+    public TestUser(String userId) {
+    	this.userId = userId;
+    }
 
     @OneToMany(mappedBy = "testUser")
     @JsonBackReference
