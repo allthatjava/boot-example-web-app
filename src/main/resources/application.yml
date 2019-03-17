@@ -1,0 +1,49 @@
+#spring:
+#    profiles:
+#        active: LOCAL
+
+---
+spring:
+    profiles: LOCAL, default
+# H2
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+# Datasource
+    datasource: 
+        url: jdbc:h2:file:~/test
+        username: sa
+        password: 
+        driver-class-name: org.h2.Driver
+# jpa hibernate
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
+                format_sql: true
+        show-sql: true
+        hibernate:
+            naming:                strategy: org.hibernate.cfg.DefaultNamingStrategy
+
+--- 
+spring:    profiles: DEV
+# Datasource - PostgreSQL
+    datasource: 
+        url: "jdbc:postgresql://{host}:{port}/{database}"
+        username: username
+        password: password
+        driver-class-name: org.postgresql.Driver
+# jpa hibernate
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        show-sql: true
+        hibernate:
+            naming:
+                strategy: org.hibernate.cfg.DefaultNamingStrategy
+  
+
+
