@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.config;
+package brian.template.boot.web.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

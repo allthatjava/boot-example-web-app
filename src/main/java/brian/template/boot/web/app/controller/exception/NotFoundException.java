@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.controller.exception;
+package brian.template.boot.web.app.controller.exception;
 
 public class NotFoundException extends RuntimeException {
 

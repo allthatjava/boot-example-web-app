@@ -1,8 +1,9 @@
-package brian.boot.template.web.app.repository;
+package brian.template.boot.web.app.repository;
 
-import brian.boot.template.web.app.domain.Post;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import brian.template.boot.web.app.domain.Post;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Integer>{

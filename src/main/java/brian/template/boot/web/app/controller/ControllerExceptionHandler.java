@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.controller;
+package brian.template.boot.web.app.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import brian.boot.template.web.app.controller.exception.NotFoundException;
+import brian.template.boot.web.app.controller.exception.NotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {

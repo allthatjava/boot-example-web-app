@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.domain;
+package brian.template.boot.web.app.domain;
 
 import lombok.Getter;
 import lombok.Setter;

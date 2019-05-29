@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.controller;
+package brian.template.boot.web.app.controller;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import brian.boot.template.web.app.controller.exception.NoUserFoundException;
-import brian.boot.template.web.app.controller.exception.NotFoundException;
-import brian.boot.template.web.app.domain.Post;
-import brian.boot.template.web.app.domain.PostRequest;
-import brian.boot.template.web.app.domain.PostResponse;
-import brian.boot.template.web.app.domain.TestUser;
-import brian.boot.template.web.app.service.PostService;
+import brian.template.boot.web.app.controller.exception.NoUserFoundException;
+import brian.template.boot.web.app.controller.exception.NotFoundException;
+import brian.template.boot.web.app.domain.Post;
+import brian.template.boot.web.app.domain.PostRequest;
+import brian.template.boot.web.app.domain.PostResponse;
+import brian.template.boot.web.app.domain.TestUser;
+import brian.template.boot.web.app.service.PostService;
 
 @RestController
 public class PostController {

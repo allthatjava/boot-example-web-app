@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.service;
+package brian.template.boot.web.app.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -13,8 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import brian.boot.template.web.app.domain.Post;
-import brian.boot.template.web.app.repository.PostRepository;
+import brian.template.boot.web.app.domain.Post;
+import brian.template.boot.web.app.repository.PostRepository;
+import brian.template.boot.web.app.service.PostService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostServiceTest {

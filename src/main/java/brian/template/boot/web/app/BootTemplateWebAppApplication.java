@@ -1,4 +1,4 @@
-package brian.boot.template.web.app;
+package brian.template.boot.web.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package brian.boot.template.web.app.controller;
+package brian.template.boot.web.app.controller;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
