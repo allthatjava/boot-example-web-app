@@ -1,22 +1,21 @@
 #spring:
 #    profiles:
 #        active: LOCAL
-
 ---
 spring:
-    profiles: LOCAL, default
+    profiles: dev
 # H2
     h2:
         console:
             enabled: true
             path: /h2-console
-# Datasource
+# Datasource - H2
+h2:
     datasource: 
         url: jdbc:h2:file:~/test
         username: sa
         password: 
         driver-class-name: org.h2.Driver
-# jpa hibernate
     jpa:
         properties:
             hibernate:
@@ -24,17 +23,17 @@ spring:
                 format_sql: true
         show-sql: true
         hibernate:
-            naming:                strategy: org.hibernate.cfg.DefaultNamingStrategy
-
+            naming:
+            strategy: org.hibernate.cfg.DefaultNamingStrategy
 --- 
-spring:    profiles: DEV
+spring:    profiles: cloud
 # Datasource - PostgreSQL
+postgres:
     datasource: 
-        url: "jdbc:postgresql://{host}:{port}/{database}"
-        username: username
-        password: password
+        url: jdbc:postgresql://{database-server}:{port}/{database}
+        username: {username}
+        password: {password}
         driver-class-name: org.postgresql.Driver
-# jpa hibernate
     jpa:
         properties:
             hibernate:
@@ -43,7 +42,4 @@ spring:    profiles: DEV
         show-sql: true
         hibernate:
             naming:
-                strategy: org.hibernate.cfg.DefaultNamingStrategy
-  
-
-
+            strategy: org.hibernate.cfg.DefaultNamingStrategy
