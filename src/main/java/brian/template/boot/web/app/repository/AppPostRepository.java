@@ -3,11 +3,11 @@ package brian.template.boot.web.app.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import brian.template.boot.web.app.domain.Post;
+import brian.template.boot.web.app.domain.AppPost;
 
 @Repository
-public interface PostRepository extends CrudRepository<Post, Integer>{
+public interface AppPostRepository extends CrudRepository<AppPost, Integer>{
 	
-	public Post findByPostId(Integer postId);
+	public AppPost findByPostId(Integer postId);
 	
 }

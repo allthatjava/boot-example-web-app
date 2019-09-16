@@ -13,24 +13,24 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import brian.template.boot.web.app.domain.Post;
-import brian.template.boot.web.app.repository.PostRepository;
-import brian.template.boot.web.app.service.PostService;
+import brian.template.boot.web.app.domain.AppPost;
+import brian.template.boot.web.app.repository.AppPostRepository;
+import brian.template.boot.web.app.service.AppPostService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PostServiceTest {
+public class AppPostServiceTest {
 
-	@Mock private PostRepository postRepository;
-    @InjectMocks private PostService service;
+	@Mock private AppPostRepository postRepository;
+    @InjectMocks private AppPostService service;
 
-    private List<Post> expectedList;
+    private List<AppPost> expectedList;
 
     @Before
     public void setUp(){
 //        service = new PostService();	// @InjectMocks will initialize it.
 
         expectedList = new ArrayList<>();
-        Post p1 = new Post();
+        AppPost p1 = new AppPost();
         p1.setSubject("test");
         expectedList.add(p1);
     }
@@ -39,8 +39,8 @@ public class PostServiceTest {
     public void testGetAllPost_shouldReturnList(){
 
         // Given
-        List<Post> list = new ArrayList<>();
-        Post p1 = new Post();
+        List<AppPost> list = new ArrayList<>();
+        AppPost p1 = new AppPost();
         p1.setSubject("test");
         list.add(p1);
 
@@ -48,7 +48,7 @@ public class PostServiceTest {
         when(postRepository.findAll()).thenReturn(expectedList);
 
         // Test
-        List<Post> expected = service.getAllPost();
+        List<AppPost> expected = service.getAllPost();
 
         assertThat(list.get(0).getSubject()).isEqualTo(expected.get(0).getSubject());
     }

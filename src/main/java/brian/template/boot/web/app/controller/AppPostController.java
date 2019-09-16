@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import brian.template.boot.web.app.domain.Post;
+import brian.template.boot.web.app.domain.AppPost;
 import brian.template.boot.web.app.exception.CreationException;
 import brian.template.boot.web.app.exception.NotFoundException;
-import brian.template.boot.web.app.service.PostService;
+import brian.template.boot.web.app.service.AppPostService;
 
 @RestController
-public class PostController {
+public class AppPostController {
 
-	private PostService service;
+	private AppPostService service;
 
 	@Autowired
-	public PostController(PostService postService) {
+	public AppPostController(AppPostService postService) {
 		this.service = postService;
 	}
 
@@ -34,7 +34,7 @@ public class PostController {
 	 * @return
 	 */
 	@GetMapping("/posts")
-	public ResponseEntity<List<Post>> getPosts() {
+	public ResponseEntity<List<AppPost>> getPosts() {
 		return new ResponseEntity<>(service.getAllPost(), HttpStatus.OK);
 	}
 
@@ -45,8 +45,8 @@ public class PostController {
 	 * @return
 	 */
 	@GetMapping("/post/{post_id}")
-	public ResponseEntity<Post> getPost(@PathVariable("post_id") Integer postId) {
-		Post p = service.getPost(postId);
+	public ResponseEntity<AppPost> getPost(@PathVariable("post_id") Integer postId) {
+		AppPost p = service.getPost(postId);
 
 		if (p == null)
 			throw new NotFoundException("Post not found with post id : " + postId);
@@ -61,7 +61,7 @@ public class PostController {
 	 * @return
 	 */
 	@PostMapping("/post")
-	public ResponseEntity<Post> addPost(@RequestBody Post post) {
+	public ResponseEntity<AppPost> addPost(@RequestBody AppPost post) {
 
 		if (null == post || null == post.getSubject() || null == post.getContent())
 			throw new IllegalArgumentException("Subject or Content cannot be null");
@@ -80,8 +80,8 @@ public class PostController {
 	}
 
 	@PutMapping("/post")
-	public ResponseEntity<Post> updatePost(@RequestBody Post post) {
-		Post updatedPost = service.updatePost(post);
+	public ResponseEntity<AppPost> updatePost(@RequestBody AppPost post) {
+		AppPost updatedPost = service.updatePost(post);
 
 		return new ResponseEntity<>(updatedPost, HttpStatus.OK);
 	}

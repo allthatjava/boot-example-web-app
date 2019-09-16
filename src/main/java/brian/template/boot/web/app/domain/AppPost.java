@@ -21,8 +21,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "app_post")
+public class AppPost {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class Post {
 	@JsonIgnore
 	private AppUser appUser;
 
-	public Post() {
+	public AppPost() {
 		this.createdDatetime = new Timestamp(new Date().getTime());
 	}
 }

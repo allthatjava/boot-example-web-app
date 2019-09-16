@@ -28,6 +28,6 @@ public class AppUser {
 	private int age;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appUser")
-	private List<Post> posts;
+	private List<AppPost> posts;
 
 }

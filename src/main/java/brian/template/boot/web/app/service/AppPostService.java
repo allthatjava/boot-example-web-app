@@ -7,25 +7,25 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import brian.template.boot.web.app.domain.Post;
-import brian.template.boot.web.app.repository.PostRepository;
+import brian.template.boot.web.app.domain.AppPost;
+import brian.template.boot.web.app.repository.AppPostRepository;
 
 @Service
-public class PostService {
+public class AppPostService {
 
 	@Autowired
-	private PostRepository repo;
+	private AppPostRepository repo;
 
-	public List<Post> getAllPost() {
+	public List<AppPost> getAllPost() {
 		return StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
 	}
 
-	public Post getPost(int postId) {
+	public AppPost getPost(int postId) {
 
 		return repo.findByPostId(postId);
 	}
 
-	public Post addPost(Post post) {
+	public AppPost addPost(AppPost post) {
 		return repo.save(post);
 	}
 
@@ -33,7 +33,7 @@ public class PostService {
 		repo.delete(postId);
 	}
 
-	public Post updatePost(Post post) {
+	public AppPost updatePost(AppPost post) {
 		return repo.save(post);
 	}
 }
