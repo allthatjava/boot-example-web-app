@@ -8,4 +8,6 @@ import brian.template.boot.web.app.domain.Post;
 @Repository
 public interface PostRepository extends CrudRepository<Post, Integer>{
 	
+	public Post findByPostId(Integer postId);
+	
 }

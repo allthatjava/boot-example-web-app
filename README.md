@@ -6,7 +6,7 @@ Just for the testing purpose, Embedded H2 database is used.
 * Framework : Spring Boot - 1.5.7
 * Front End : AngularJS - 2.0
 * ORM : JPA / Hibernate
-* Database : H2 - h2-2017-04-23
+* Database : H2 - h2-2017-04-23 (Local)	/ PostgreSQL (Cloud)
 * Unit Test : jUnit + AssertJ
 * Code Quality : Jacoco
 
@@ -16,7 +16,7 @@ go to `http://localhost:8080/h2-console` on the browser.
 
 #### Create Test Database
 ```
-CREATE TABLE TEST_USER(
+CREATE TABLE APP_USER(
     USER_ID VARCHAR(10) PRIMARY KEY,
     PW VARCHAR(20) NOT NULL,
     NAME VARCHAR(20) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE POST(
     SUBJECT VARCHAR(50),
     CONTENT VARCHAR(200),
     CREATED_DATETIME DATETIME,
-    FOREIGN KEY (USER_ID) REFERENCES TEST_USER(USER_ID)
+    FOREIGN KEY (USER_ID) REFERENCES APP_USER(USER_ID)
 );
 
 ```
@@ -38,9 +38,9 @@ CREATE TABLE POST(
 
 #### Add some test data
 ```
-INSERT INTO TEST_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES( 'tester1', '1234', 'Brian Heo', 'Sir', 42);
-INSERT INTO TEST_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES('tester2', '1234', 'Phil Lee', 'Mr.', 42);
-INSERT INTO TEST_USER(USER_ID, PW, NAME, AGE) VALUES('tester3', '1234', 'Gerrard Lee', 43);
+INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES( 'tester1', '1234', 'Brian Heo', 'Sir', 42);
+INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES('tester2', '1234', 'Phil Lee', 'Mr.', 42);
+INSERT INTO APP_USER(USER_ID, PW, NAME, AGE) VALUES('tester3', '1234', 'Gerrard Lee', 43);
 
 INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1', 'Test Subject 1', 'Contents of Test subject 1', CURRENT_TIMESTAMP());
 INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester2', 'Test Subject 2', 'Contents of Test subject 2', CURRENT_TIMESTAMP());
@@ -53,17 +53,32 @@ INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester3',
 INSERT INTO POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1', 'Test Subject 9', 'Contents of Test subject 9', CURRENT_TIMESTAMP());
 ```
 
+## Security
+Spring Security with Form login 
+
+
+## Database - ORM
+Spring JPA
+
+
+## Supporting multiple environment by @Profile
+
+
 ## Unit Testing
 TBD
+
 
 ## Integration Test
 TBD
 
+
 ## Code Quality Check
 TBD
+
 
 ## How to use the this web application
 * To see all posts data : http://localhost:8080/posts
 * To see one post : http://localhost:8080/post/{post_id} -> e.g. http://localhost:8080/post/1
 
 
+# Front End

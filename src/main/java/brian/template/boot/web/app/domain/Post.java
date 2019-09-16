@@ -1,70 +1,47 @@
 package brian.template.boot.web.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
-@Table(name="post")
+@Table(name = "post")
 public class Post {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="post_id")
-    private Integer postId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "post_id")
+	private Integer postId;
+	private String subject;
+	private String content;
+	@Column(name = "user_id", insertable = false, updatable = false)
+	private String userId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonManagedReference
-    private TestUser testUser;
+	@Column(name = "created_datetime")
+	private Timestamp createdDatetime;
 
-    private String subject;
-    private String content;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	@JsonIgnore
+	private AppUser appUser;
 
-    @Column(name="created_datetime")
-    private Timestamp createdDatetime;
-
-//    private Post(){}  // Good to have private constructor but, need to be public for testing
-
-    public Integer getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-
-    public TestUser getTestUser() {
-        return testUser;
-    }
-
-    public void setTestUser(TestUser testUser) {
-        this.testUser = testUser;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreatedDatetime() {
-        return createdDatetime;
-    }
-
-    public void setCreatedDatetime(Timestamp createdDatetime) {
-        this.createdDatetime = createdDatetime;
-    }
-
+	public Post() {
+		this.createdDatetime = new Timestamp(new Date().getTime());
+	}
 }

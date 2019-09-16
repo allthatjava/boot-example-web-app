@@ -1,6 +1,6 @@
-#spring:
-#    profiles:
-#        active: LOCAL
+spring:
+    profiles:
+        active: dev
 ---
 spring:
     profiles: dev
@@ -12,7 +12,7 @@ spring:
 # Datasource - H2
 h2:
     datasource: 
-        url: jdbc:h2:file:~/test
+        url: jdbc:h2:file:~/test;AUTO_SERVER=TRUE
         username: sa
         password: 
         driver-class-name: org.h2.Driver

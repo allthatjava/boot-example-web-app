@@ -1,30 +1,39 @@
 package brian.template.boot.web.app.service;
 
-import brian.template.boot.web.app.domain.Post;
-import brian.template.boot.web.app.repository.PostRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import brian.template.boot.web.app.domain.Post;
+import brian.template.boot.web.app.repository.PostRepository;
 
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+	@Autowired
+	private PostRepository repo;
 
-    public List<Post> getAllPost()
-    {
-        return (List<Post>)postRepository.findAll();
-    }
-    
-    public Post getPost(int postId) {
-    	
-    	return postRepository.findOne(postId);
-    }
-    
-    public Post addPost(Post post) {
-    	return postRepository.save(post);
-    }
+	public List<Post> getAllPost() {
+		return StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
+	}
+
+	public Post getPost(int postId) {
+
+		return repo.findByPostId(postId);
+	}
+
+	public Post addPost(Post post) {
+		return repo.save(post);
+	}
+
+	public void deletePost(Integer postId) {
+		repo.delete(postId);
+	}
+
+	public Post updatePost(Post post) {
+		return repo.save(post);
+	}
 }
