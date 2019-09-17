@@ -4,7 +4,6 @@ Just for the testing purpose, Embedded H2 database is used.
 
 ## Template contains
 * Framework : Spring Boot - 1.5.7
-* Front End : AngularJS - 2.0
 * ORM : JPA / Hibernate
 * Database : H2 - h2-2017-04-23 (Local)	/ PostgreSQL (Cloud)
 * Unit Test : jUnit + AssertJ
@@ -80,5 +79,3 @@ TBD
 * To see all posts data : http://localhost:8080/posts
 * To see one post : http://localhost:8080/post/{post_id} -> e.g. http://localhost:8080/post/1
 
-
-# Front End
