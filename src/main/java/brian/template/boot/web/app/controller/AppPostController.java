@@ -21,12 +21,13 @@ import brian.template.boot.web.app.service.AppPostService;
 @RestController
 public class AppPostController {
 
+	@Autowired
 	private AppPostService service;
 
-	@Autowired
-	public AppPostController(AppPostService postService) {
-		this.service = postService;
-	}
+//	@Autowired			// To use MockMvc, I commented out constructor based auto-wiring.
+//	public AppPostController(AppPostService postService) {
+//		this.service = postService;
+//	}
 
 	/**
 	 * Returns all posts
