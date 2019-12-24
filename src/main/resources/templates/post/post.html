@@ -1,0 +1,71 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <meta charset="UTF-8">
+    <title>Post</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1>Post Edit</h1>
+                </div>
+                <div class="panel-body">
+                    <!--/*@thymesVar id="postCommand" type="brian.example.boot.web.app.command.PostCommand"*/-->
+                    <form id="postUpdateForm" th:action="@{'/post/'+*{postId}}" th:object="${postCommand}" th:method="put">
+                        <input name="postId" th:field="*{postId}" th:hidden="hidden" />
+
+                        <div class="row">
+                            <div class="col-sm-3"><span><b>Subject:</b></span></div>
+                            <div class="col-sm-9">
+                                <input name="subject" class="col-md-12" th:field="*{subject}"/>
+                                <!-- error message for subject input above -->
+                                <span class="error" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"><span><b>Content:</b></span></div>
+                            <div class="col-sm-9">
+                                <textarea name="content" class="col-md-12" th:field="*{content}">Post Content</textarea>
+                                <!-- error message for subject textarea above -->
+                                <span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3" ><span><b>User:</b></span></div>
+                            <div class="col-sm-9" >
+                                <input name="userId" th:field="*{userId}" th:hidden="hidden" />
+                                <span th:text="*{userId}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" >
+                                <a class="btn btn-warning" href="/posts">Back to List</a>
+                                <button class="btn btn-primary" id="delBtn">Delete</button>
+                            </div>
+                            <div style="text-align: right">
+                                <input class="btn btn-primary" type="submit" value="Submit"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+<script type="text/javascript">
+    $("#delBtn").click(function(event){
+        event.preventDefault();
+
+        $form = $("#postUpdateForm");
+        $form.find("input[name='_method']").val("delete");
+        $form.submit();
+    });
+</script>
+</body>
+</html>

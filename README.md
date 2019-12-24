@@ -62,6 +62,8 @@ Spring JPA
 
 ## Supporting multiple environment by @Profile
 
+## Error Handling
+error/error.html
 
 ## Unit Testing
 TBD

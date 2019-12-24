@@ -1,4 +1,4 @@
-package brian.template.boot.web.app.controller;
+package brian.example.boot.web.app.controller;
 
 import static org.mockito.Mockito.when;
 
@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import brian.template.boot.web.app.domain.AppPost;
-import brian.template.boot.web.app.service.AppPostService;
+import brian.example.boot.web.app.domain.AppPost;
+import brian.example.boot.web.app.service.AppPostService;
 
 //@IfProfileValue(name = "spring.profiles.active", values = { "default", "dev" })
 @RunWith(SpringRunner.class)
