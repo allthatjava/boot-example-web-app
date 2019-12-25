@@ -1,6 +1,7 @@
 package brian.example.boot.web.app.controller;
 
 import brian.example.boot.web.app.command.PostCommand;
+import brian.example.boot.web.app.domain.AppUser;
 import brian.example.boot.web.app.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import brian.example.boot.web.app.exception.CreationException;
 import brian.example.boot.web.app.exception.NotFoundException;
 import brian.example.boot.web.app.service.AppPostService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -20,11 +22,13 @@ public class AppPostController {
 
 	private AppPostService service;
 	private AppUserService appUserService;
+	private HttpSession session;
 
 	@Autowired			// To use MockMvc, I commented out constructor based auto-wiring.
-	public AppPostController(AppPostService postService, AppUserService appUserService) {
+	public AppPostController(AppPostService postService, AppUserService appUserService, HttpSession session) {
 		this.service = postService;
 		this.appUserService = appUserService;
+		this.session = session;
 	}
 
 	/**
@@ -33,11 +37,11 @@ public class AppPostController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/posts")
+	@GetMapping({"/posts"})
 	public String getPosts(Model model) {
 		model.addAttribute( "posts", service.getAllPost());
 
-		return "post/index";
+		return "post/posts";
 	}
 
 	/**
@@ -75,8 +79,10 @@ public class AppPostController {
 	@GetMapping("/post")
 	public String initPostInsert(Model model){
 
+		AppUser appUser = (AppUser)session.getAttribute("loggedInUser");
+
 		PostCommand command = new PostCommand();
-		command.setUserId("tester1");
+		command.setUserId(appUser.getUserId());
 		model.addAttribute( "postCommand", command);
 
 		return "post/form";

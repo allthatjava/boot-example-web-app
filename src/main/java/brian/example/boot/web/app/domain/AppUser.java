@@ -1,5 +1,6 @@
 package brian.example.boot.web.app.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "app_user")
-public class AppUser {
+public class AppUser implements Serializable {
 
 	@Id
 	@Column(name = "user_id")

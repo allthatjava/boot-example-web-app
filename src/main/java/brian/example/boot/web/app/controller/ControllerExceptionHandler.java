@@ -1,5 +1,6 @@
 package brian.example.boot.web.app.controller;
 
+import brian.example.boot.web.app.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.RequestDispatcher;
@@ -16,41 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalTime;
 
-//@Controller
-//public class ControllerExceptionHandler implements ErrorController {
-//
-//	private Logger log = LoggerFactory.getLogger(ControllerExceptionHandler.class);
-
-//	@GetMapping("/error")
-//	public String handleError(HttpServletRequest request) {
-//		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-//
-//		if (status != null) {
-//			int statusCode = Integer.parseInt(status.toString());
-//
-//			if (statusCode == HttpStatus.NOT_FOUND.value()) {
-//				return "error/404";
-//			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-//				return "error/500";
-//			}
-//		}
-//
-//		return "error";
-//	}
-//
-//	@Override
-//	public String getErrorPath() {
-//		return "/error";
-//	}
-
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
 	private Logger log = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({IllegalArgumentException.class})
-	public String handleBadRequest(HttpServletRequest req, Exception ex){
+	@ExceptionHandler({IllegalArgumentException.class, NotFoundException.class})
+	public String handleBadRequest(HttpServletRequest req, Exception ex, Model model){
+
+		model.addAttribute("timestamp", LocalTime.now());
+		model.addAttribute("path", req.getRequestURL());
+		model.addAttribute("error", ex.getCause());
+		model.addAttribute("message", ex.getMessage());
+		model.addAttribute("status", HttpStatus.NOT_FOUND.value());
+		model.addAttribute("trace", ex.getStackTrace());
 
 		return "error/400";
 	}

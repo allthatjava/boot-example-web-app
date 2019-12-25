@@ -17,7 +17,7 @@ go to `http://localhost:8080/h2-console` on the browser.
 ```
 CREATE TABLE APP_USER(
     USER_ID VARCHAR(10) PRIMARY KEY,
-    PW VARCHAR(20) NOT NULL,
+    PW VARCHAR(100) NOT NULL,
     NAME VARCHAR(20) NOT NULL,
     TITLE VARCHAR(10),
     AGE INT
@@ -37,9 +37,9 @@ CREATE TABLE APP_POST(
 
 #### Add some test data
 ```
-INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES( 'tester1', '1234', 'Brian Heo', 'Sir', 42);
-INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES('tester2', '1234', 'Phil Lee', 'Mr.', 42);
-INSERT INTO APP_USER(USER_ID, PW, NAME, AGE) VALUES('tester3', '1234', 'Gerrard Lee', 43);
+INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES( 'tester1', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Brian Heo', 'Sir', 42);
+INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES('tester2', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Phil Lee', 'Mr.', 42);
+INSERT INTO APP_USER(USER_ID, PW, NAME, AGE) VALUES('tester3', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Gerrard Lee', 43);
 
 INSERT INTO APP_POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester1', 'Test Subject 1', 'Contents of Test subject 1', CURRENT_TIMESTAMP());
 INSERT INTO APP_POST(USER_ID, SUBJECT, CONTENT, CREATED_DATETIME) VALUES( 'tester2', 'Test Subject 2', 'Contents of Test subject 2', CURRENT_TIMESTAMP());
@@ -63,7 +63,14 @@ Spring JPA
 ## Supporting multiple environment by @Profile
 
 ## Error Handling
-error/error.html
+Error handling is in ControllerExceptionHandler.java
+* src/main/resources/templates/error.html
+
+* src/main/resources/templates/error/400.html
+![Alt](docs/ui-screen-error-01.png)
+
+* src/main/resources/templates/error/404.html
+![Alt](docs/ui-screen-error-02.png)
 
 ## Unit Testing
 TBD
@@ -78,6 +85,15 @@ TBD
 
 
 ## How to use the this web application
-* To see all posts data : http://localhost:8080/posts
-* To see one post : http://localhost:8080/post/{post_id} -> e.g. http://localhost:8080/post/1
+* Login : http://localhost:8080/
+    * Login with prepared username/password such as __tester1__/__1234__
+    ![Alt](docs/ui-screen-01.png)
 
+* Logged In > Post List : 
+![Alt](docs/ui-screen-02.png)
+
+* New Post :
+![Alt](docs/ui-screen-03.png)
+
+* Read / Edit Post :
+![Alt](docs/ui-screen-04.png)

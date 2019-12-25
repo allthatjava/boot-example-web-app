@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}" />
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div class="container">
-
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <div style="text-align: right" th:if="${session.loggedInUser.name} != null"><!-- LOG OUT button -->
+                <form th:action="@{/logout}" method="post">
+                    <span th:text="${session.loggedInUser.name}"></span>
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1>Post Add</h1>
@@ -31,7 +36,7 @@
                         </div>
                         <div class="col-md-3"><span><b>Writer:</b></span></div>
                         <div class="col-md-9">
-                            <input name="userId" class="form-control" th:field="*{userId}" />
+                            <input name="userId" class="form-control" th:field="*{userId}" readonly="readonly" />
                         </div>
                         <div class="col-md-6" >
                             <a class="btn btn-warning" href="/posts">Back to List</a>
@@ -45,8 +50,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}" ></script>
 <script type="text/javascript">
     $(document).ready(function() {
 

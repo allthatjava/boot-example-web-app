@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}" />
 </head>
 <body>
 <div class="row">
@@ -43,13 +43,18 @@
                     </tr>
                 </table>
                 <div class="row">
-                    <a class="btn btn-warning" href="/posts">Back to List</a>
+                    <div class="col-md-6" th:if="${session.loggedInUser} != null">
+                        <a class="btn btn-warning" href="/posts">Back to List</a>
+                    </div>
+                    <div class="col-md-6" th:if="${session.loggedInUser} == null">
+                        <a class="btn btn-warning" href="/">Go to Login Screen</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}" ></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ package brian.example.boot.web.app.exception;
 public class NotFoundException extends RuntimeException {
 
 	/**
-	 * 
+	 * Throw this exception when item was not found
 	 */
 	private static final long serialVersionUID = 1323040521845611469L;
 
