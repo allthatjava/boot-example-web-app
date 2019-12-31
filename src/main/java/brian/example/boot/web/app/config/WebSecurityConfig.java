@@ -16,7 +16,8 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
 
     @Autowired
     @Qualifier("appUserService")
@@ -27,8 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/" ).permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()  // to enable H2 console under Spring Security
+                .antMatchers("/h2-console/**").permitAll()  // to enable H2 console under Spring Security
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()

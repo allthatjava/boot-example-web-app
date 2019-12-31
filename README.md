@@ -37,6 +37,7 @@ CREATE TABLE APP_POST(
 
 #### Add some test data
 ```
+--- password is 1234 (It is Bcrypted)
 INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES( 'tester1', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Brian Heo', 'Sir', 42);
 INSERT INTO APP_USER(USER_ID, PW, NAME, TITLE, AGE) VALUES('tester2', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Phil Lee', 'Mr.', 42);
 INSERT INTO APP_USER(USER_ID, PW, NAME, AGE) VALUES('tester3', '$2a$10$mcbZhPS7CVDPy88X7cF.7OOf7rPVOEX9aTGe1lgHC9qNm.fdYNbkS', 'Gerrard Lee', 43);

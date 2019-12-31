@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
@@ -25,16 +26,33 @@ public class ControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({IllegalArgumentException.class, NotFoundException.class})
-	public String handleBadRequest(HttpServletRequest req, Exception ex, Model model){
+	public ModelAndView handleBadRequest(HttpServletRequest req, Exception ex){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("timestamp", LocalTime.now());
+		modelAndView.addObject("path", req.getRequestURL());
+		modelAndView.addObject("error", ex.getCause());
+		modelAndView.addObject("message", ex.getMessage());
+		modelAndView.addObject("status", HttpStatus.NOT_FOUND.value());
+		modelAndView.addObject("trace", ex.getStackTrace());
 
-		model.addAttribute("timestamp", LocalTime.now());
-		model.addAttribute("path", req.getRequestURL());
-		model.addAttribute("error", ex.getCause());
-		model.addAttribute("message", ex.getMessage());
-		model.addAttribute("status", HttpStatus.NOT_FOUND.value());
-		model.addAttribute("trace", ex.getStackTrace());
+		modelAndView.setViewName("error/400");
+		return modelAndView;
+	}
 
-		return "error/400";
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({NumberFormatException.class, MethodArgumentTypeMismatchException.class})
+	public ModelAndView handleBadRequest2(HttpServletRequest req, Exception ex){
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("timestamp", LocalTime.now());
+		modelAndView.addObject("path", req.getRequestURL());
+		modelAndView.addObject("error", ex.getCause());
+		modelAndView.addObject("message", ex.getMessage());
+		modelAndView.addObject("status", HttpStatus.NOT_FOUND.value());
+		modelAndView.addObject("trace", ex.getStackTrace());
+
+		modelAndView.setViewName("error/400");
+		return modelAndView;
 	}
 
 	/**
@@ -44,6 +62,7 @@ public class ControllerExceptionHandler {
 	 * @param model
 	 * @return
 	 */
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public String handle404Exception(NoHandlerFoundException ex, Model model) {
 		//do whatever you want

@@ -1,5 +1,8 @@
 package brian.example.boot.web.app.exception;
 
+import org.springframework.http.HttpStatus;
+
+// @ResponseStatus(HttpStatus.NOT_FOUND)  // Instead of using ControllerAdvice, you can put status code here as well.
 public class NotFoundException extends RuntimeException {
 
 	/**
@@ -15,15 +18,8 @@ public class NotFoundException extends RuntimeException {
 		super(message);
 	}
 
-	public NotFoundException(String message, String... args) {
-		super(String.format(message, args));
-	}
-
 	public NotFoundException(String message, Exception ex) {
 		super(message, ex);
 	}
 
-	public NotFoundException(String message, Exception ex, String... args) {
-		super(String.format(message, args), ex);
-	}
 }

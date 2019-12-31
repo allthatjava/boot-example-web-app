@@ -2,7 +2,9 @@ package brian.example.boot.web.app.controller;
 
 import brian.example.boot.web.app.command.PostCommand;
 import brian.example.boot.web.app.domain.AppUser;
+import brian.example.boot.web.app.mapper.AppPostMapper;
 import brian.example.boot.web.app.service.AppUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,22 +15,27 @@ import brian.example.boot.web.app.domain.AppPost;
 import brian.example.boot.web.app.exception.CreationException;
 import brian.example.boot.web.app.exception.NotFoundException;
 import brian.example.boot.web.app.service.AppPostService;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class AppPostController {
 
 	private AppPostService service;
 	private AppUserService appUserService;
 	private HttpSession session;
+	private AppPostMapper mapper;
 
 	@Autowired			// To use MockMvc, I commented out constructor based auto-wiring.
-	public AppPostController(AppPostService postService, AppUserService appUserService, HttpSession session) {
+	public AppPostController(AppPostService postService, AppUserService appUserService,
+							 HttpSession session, AppPostMapper mapper) {
 		this.service = postService;
 		this.appUserService = appUserService;
 		this.session = session;
+		this.mapper = mapper;
 	}
 
 	/**
@@ -47,27 +54,29 @@ public class AppPostController {
 	/**
 	 * Display selected post
 	 *
-	 * @param model
 	 * @param postId
 	 * @return
 	 */
 	@GetMapping("/post/{post_id}")
-	public String getPost(Model model, @PathVariable("post_id") Integer postId){
+	public ModelAndView getPost(@PathVariable("post_id") Integer postId){
 
-		AppPost p = service.getPost(postId);
+		AppPost appPost = service.getPost(postId);
 
-		if (p == null)
+		if (appPost == null)
 			throw new NotFoundException("Post not found with post id : " + postId);
 
-		PostCommand command = new PostCommand();
-		command.setPostId(p.getPostId());
-		command.setSubject(p.getSubject());
-		command.setContent(p.getContent());
-		command.setUserId(p.getAppUser().getUserId());
+//		PostCommand command = new PostCommand();
+//		command.setPostId(p.getPostId());
+//		command.setSubject(p.getSubject());
+//		command.setContent(p.getContent());
+//		command.setUserId(p.getAppUser().getUserId());
+		PostCommand command = mapper.toPostCommand(appPost);
 
-		model.addAttribute("postCommand", command);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("postCommand", command);
+		modelAndView.setViewName("post/post");
 
-		return "post/post";
+		return modelAndView;
 	}
 
 	/**
@@ -101,13 +110,14 @@ public class AppPostController {
 
 		// Validate the form fields (Requires command object and BindingResult object)
 		if (bindingResult.hasErrors()) {
+			bindingResult.getAllErrors().forEach(e -> log.debug(e.toString()));	// just to log (not necessary)
 			return "post/form";
 		}
 
 		String userId = postCommand.getUserId();
 
 		if (null == userId)
-			throw new NotFoundException("User ID [%s] was not found", userId);
+			throw new NotFoundException(String.format("User ID [%s] was not found", userId));
 
 		// Form to Model
 		AppPost post = new AppPost();

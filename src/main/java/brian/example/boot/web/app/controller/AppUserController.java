@@ -69,7 +69,7 @@ public class AppUserController {
 		String userId = appUser.getUserId();
 
 		if (null == userId)
-			throw new NotFoundException("User ID [%s] was not found", userId);
+			throw new NotFoundException(String.format("User ID [%s] was not found", userId));
 
 		appUser = service.addAppUser(appUser);
 
