@@ -60,6 +60,9 @@ Spring Security with Form login
 ## Database - ORM
 Spring JPA
 
+## Convenience Libraries
+* Lombok : Annotation based getter, setter, logger ... 
+* MapStruct : Annotation based Map the data between object
 
 ## Supporting multiple environment by @Profile
 

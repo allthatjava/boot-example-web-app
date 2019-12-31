@@ -1,5 +1,6 @@
 package brian.example.boot.web.app.controller;
 
+import brian.example.boot.web.app.mapper.AppPostMapper;
 import brian.example.boot.web.app.service.AppPostService;
 import brian.example.boot.web.app.service.AppUserService;
 import org.junit.Before;
@@ -28,21 +29,22 @@ public class PostControllerTest {
     private AppPostService postService;
     private AppUserService userService;
     private HttpSession session;
+    private AppPostMapper mapper;
 
     @Autowired
     public PostControllerTest(){
-//        controller = new AppPostController(postService, userService, session);
-//        mockMvc = MockMvcBuilders.standaloneSetup(controller)
-//                .setControllerAdvice(new ControllerExceptionHandler())
-//                .build();
+        controller = new AppPostController(postService, userService, session, mapper);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
     public void testGetPost_withWrongFormatParam_expectBadRequest() throws Exception {
-//        mockMvc.perform(get("/post/adf"))
-//                .andExpect(status().isBadRequest())
-//                .andExpect(view().name("error/400"))
-//        ;
+        mockMvc.perform(get("/post/adf"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("error/400"))
+        ;
     }
 
 }
