@@ -30,7 +30,7 @@ public class PostControllerTest {
 	private AppPostService service;
 	
     @Test
-    public void testController_withPathVariable_shouldReturnOnePost() throws Exception{
+    public void testController_withPathVariable_shouldReturnOnePost() {
     	
     	// Given
     	AppPost post = new AppPost();

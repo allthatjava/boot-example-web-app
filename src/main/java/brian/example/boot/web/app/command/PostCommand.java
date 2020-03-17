@@ -1,14 +1,12 @@
 package brian.example.boot.web.app.command;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Data
 public class PostCommand {
 
     private Integer postId;

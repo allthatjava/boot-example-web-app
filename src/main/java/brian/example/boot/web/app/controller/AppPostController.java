@@ -1,8 +1,12 @@
 package brian.example.boot.web.app.controller;
 
 import brian.example.boot.web.app.command.PostCommand;
+import brian.example.boot.web.app.domain.AppPost;
 import brian.example.boot.web.app.domain.AppUser;
-import brian.example.boot.web.app.mapper.AppPostMapper;
+import brian.example.boot.web.app.exception.CreationException;
+import brian.example.boot.web.app.exception.NotFoundException;
+import brian.example.boot.web.app.mapper.AppToPostMapper;
+import brian.example.boot.web.app.service.AppPostService;
 import brian.example.boot.web.app.service.AppUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import brian.example.boot.web.app.domain.AppPost;
-import brian.example.boot.web.app.exception.CreationException;
-import brian.example.boot.web.app.exception.NotFoundException;
-import brian.example.boot.web.app.service.AppPostService;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -27,11 +26,13 @@ public class AppPostController {
 	private AppPostService service;
 	private AppUserService appUserService;
 	private HttpSession session;
-	private AppPostMapper mapper;
+	private AppToPostMapper mapper;
 
-	@Autowired			// To use MockMvc, I commented out constructor based auto-wiring.
+//	public AppPostController(){}
+
+	@Autowired
 	public AppPostController(AppPostService postService, AppUserService appUserService,
-							 HttpSession session, AppPostMapper mapper) {
+							 HttpSession session, AppToPostMapper mapper) {
 		this.service = postService;
 		this.appUserService = appUserService;
 		this.session = session;
@@ -65,11 +66,7 @@ public class AppPostController {
 		if (appPost == null)
 			throw new NotFoundException("Post not found with post id : " + postId);
 
-//		PostCommand command = new PostCommand();
-//		command.setPostId(p.getPostId());
-//		command.setSubject(p.getSubject());
-//		command.setContent(p.getContent());
-//		command.setUserId(p.getAppUser().getUserId());
+		// Map AppPost object to PostCommand by [ MapStruct ]
 		PostCommand command = mapper.toPostCommand(appPost);
 
 		ModelAndView modelAndView = new ModelAndView();

@@ -1,15 +1,13 @@
 package brian.example.boot.web.app.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import org.mapstruct.Mapper;
+import brian.example.boot.web.app.domain.AppPost;
+import brian.example.boot.web.app.repository.AppPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import brian.example.boot.web.app.domain.AppPost;
-import brian.example.boot.web.app.repository.AppPostRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AppPostService {

@@ -1,9 +1,5 @@
 package brian.example.boot.web.app.config;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +10,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
 @Configuration
 public class DBConfig {
 
@@ -22,7 +21,7 @@ public class DBConfig {
 
 //    @ConfigurationProperties(prefix="spring.datasource")
 	@Bean
-	@Profile("dev")
+	@Profile("local")
 	public DataSource devDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("h2.datasource.driver-class-name"));
@@ -34,7 +33,7 @@ public class DBConfig {
 	}
 
 	@Bean
-	@Profile("cloud")
+	@Profile({"development","qa", "production"})
 	public DataSource cloudDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("postgres.datasource.driver-class-name"));
@@ -47,7 +46,7 @@ public class DBConfig {
 
 	@Bean("entityManagerFactory")
 	@Primary
-	@Profile(value = { "dev", "default" })
+	@Profile(value = { "local", "default" })
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryDev() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(devDataSource());
@@ -64,7 +63,7 @@ public class DBConfig {
 	}
 
 	@Bean("entityManagerFactory")
-	@Profile("cloud")
+	@Profile({"development","qa", "production"})
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryCloud() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(cloudDataSource());

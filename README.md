@@ -61,8 +61,8 @@ Spring Security with Form login
 Spring JPA
 
 ## Convenience Libraries
-* Lombok : Annotation based getter, setter, logger ... 
-* MapStruct : Annotation based Map the data between object
+* __Lombok__ : Annotation based getter, setter, logger ... 
+* __MapStruct__ : Annotation based Map the data between object
 
 ## Supporting multiple environment by @Profile
 
@@ -77,15 +77,14 @@ Error handling is in ControllerExceptionHandler.java
 ![Alt](docs/ui-screen-error-02.png)
 
 ## Unit Testing
-TBD
-
+The code is under `src/test`. You can run the test by `./gradlew test`
 
 ## Integration Test
-TBD
-
+The code is under `src/integTest`. You can run the test by `./gradlew test `
 
 ## Code Quality Check
-TBD
+##### Code Coverage
+With the following command `./gradlew test jacocoTestReport`, it will show the code coverage in `build\jacocoHtml`
 
 
 ## How to use the this web application
@@ -94,10 +93,13 @@ TBD
     ![Alt](docs/ui-screen-01.png)
 
 * Logged In > Post List : 
+
 ![Alt](docs/ui-screen-02.png)
 
 * New Post :
+
 ![Alt](docs/ui-screen-03.png)
 
 * Read / Edit Post :
+
 ![Alt](docs/ui-screen-04.png)

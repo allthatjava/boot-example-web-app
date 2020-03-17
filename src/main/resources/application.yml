@@ -1,6 +1,6 @@
 spring:
     profiles:
-        active: dev
+        active: local
     mvc:
         throw-exception-if-no-handler-found: true
         favicon:
@@ -19,7 +19,7 @@ server:
 
 ---
 spring:
-    profiles: dev
+    profiles: local
 # H2
     h2:
         console:
@@ -44,14 +44,15 @@ h2:
             naming:
             strategy: org.hibernate.cfg.DefaultNamingStrategy
 --- 
+# Cloud environment
 spring:
-    profiles: cloud
+    profiles: development
 # Datasource - PostgreSQL
 postgres:
     datasource: 
-        url: jdbc:postgresql://{database-server}:{port}/{database}
-        username: {username}
-        password: {password}
+#        url: jdbc:postgresql://{database-server}:{port}/{database}
+#        username: {username}
+#        password: {password}
         driver-class-name: org.postgresql.Driver
     jpa:
         properties:
