@@ -20,7 +20,7 @@ server:
 ---
 spring:
     profiles: local
-# H2
+# H2 - consol
     h2:
         console:
             enabled: true
@@ -46,20 +46,19 @@ h2:
 --- 
 # Cloud environment
 spring:
-    profiles: development
+    profiles: development, cloud
 # Datasource - PostgreSQL
-postgres:
-    datasource: 
-#        url: jdbc:postgresql://{database-server}:{port}/{database}
-#        username: {username}
-#        password: {password}
-        driver-class-name: org.postgresql.Driver
-    jpa:
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
-                format_sql: true
-        show-sql: true
-        hibernate:
-            naming:
-            strategy: org.hibernate.cfg.DefaultNamingStrategy
+#postgres:
+#    datasource:
+#    url: jdbc:postgresql://{database-server}:{port}/{database}
+#    username: {username}
+#    password: {password}
+#    jpa:
+#        properties:
+#            hibernate:
+#                dialect: org.hibernate.dialect.PostgreSQLDialect
+#                format_sql: true
+#        show-sql: true
+#        hibernate:
+#            naming:
+#            strategy: org.hibernate.cfg.DefaultNamingStrategy

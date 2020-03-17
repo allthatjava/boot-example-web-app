@@ -34,6 +34,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')	// Database ORM
 	compile("org.springframework.boot:spring-boot-starter-security")	// Security - Login
 
+	compile("org.springframework.cloud:spring-cloud-spring-service-connector")
+	compile("org.springframework.cloud:spring-cloud-cloudfoundry-connector")
+
 	// UI
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')	// UI Template
 	compile 'org.webjars:bootstrap:3.4.1'								// Webjar for BootStrap
@@ -41,7 +44,7 @@ dependencies {
 	compile 'org.webjars:webjars-locator:0.30'							// Webjar locator
 
 	// Database
-    compile('postgresql:postgresql:9.1-901-1.jdbc4')	// PostgreSQL - Cloud Database
+	compile('org.postgresql:postgresql:42.2.11')		// PostgreSQL - Cloud Database
 	runtime('com.h2database:h2')						// H2 - Local Testing Database
 
 	// Lombok

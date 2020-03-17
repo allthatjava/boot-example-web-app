@@ -1,9 +1,9 @@
 package brian.example.boot.web.app.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -13,15 +13,16 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@Slf4j
 @Configuration
+@Profile({"local","default"})
 public class DBConfig {
 
 	@Autowired
 	private Environment env;
 
-//    @ConfigurationProperties(prefix="spring.datasource")
+//--- Local Database - H2 --
 	@Bean
-	@Profile("local")
 	public DataSource devDataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getProperty("h2.datasource.driver-class-name"));
@@ -32,21 +33,7 @@ public class DBConfig {
 		return dataSource;
 	}
 
-	@Bean
-	@Profile({"development","qa", "production"})
-	public DataSource cloudDataSource() {
-		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getProperty("postgres.datasource.driver-class-name"));
-		dataSource.setUrl(env.getProperty("postgres.datasource.url"));
-		dataSource.setUsername(env.getProperty("postgres.datasource.username"));
-		dataSource.setPassword(env.getProperty("postgres.datasource.password"));
-
-		return dataSource;
-	}
-
 	@Bean("entityManagerFactory")
-	@Primary
-	@Profile(value = { "local", "default" })
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryDev() {
 		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(devDataSource());
@@ -61,22 +48,4 @@ public class DBConfig {
 
 		return em;
 	}
-
-	@Bean("entityManagerFactory")
-	@Profile({"development","qa", "production"})
-	public LocalContainerEntityManagerFactoryBean entityManagerFactoryCloud() {
-		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(cloudDataSource());
-		em.setPackagesToScan("brian.example.boot.web.app.domain");
-
-		final Properties prop = new Properties();
-		prop.setProperty("hibernate.dialect", env.getProperty("postgres.jpa.properties.hibernate.dialect"));
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-
-		em.setJpaProperties(prop);
-		em.setJpaVendorAdapter(vendorAdapter);
-
-		return em;
-	}
-
 }

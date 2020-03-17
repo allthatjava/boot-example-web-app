@@ -25,10 +25,12 @@ CREATE TABLE APP_USER(
 
 CREATE TABLE APP_POST(
     POST_ID INT AUTO_INCREMENT PRIMARY KEY,
+-- POST_ID SERIAL PRIMARY KEY,  ---> For Postgres
     USER_ID VARCHAR(10),
     SUBJECT VARCHAR(50),
     CONTENT VARCHAR(200),
     CREATED_DATETIME DATETIME,
+-- CREATED_DATETIME TIMESTAMP,  ---> For Postgres
     FOREIGN KEY (USER_ID) REFERENCES APP_USER(USER_ID)
 );
 
@@ -85,6 +87,22 @@ The code is under `src/integTest`. You can run the test by `./gradlew test `
 ## Code Quality Check
 ##### Code Coverage
 With the following command `./gradlew test jacocoTestReport`, it will show the code coverage in `build\jacocoHtml`
+
+
+## Cloud configuration
+* `manifest.yml` is used for PCF deployment.
+* `DBConfigCloud.java` is for Cloud Database configuration
+```java
+@Slf4j
+@Configuration
+@Profile({"development","qa", "production"})
+public class DBConfigCloud extends AbstractCloudConfig {
+    @Bean
+    public DataSource dataSource() {
+        return connectionFactory().dataSource();
+    }
+}
+``` 
 
 
 ## How to use the this web application
